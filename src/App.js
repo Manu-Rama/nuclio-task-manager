@@ -16,7 +16,7 @@ function App() {
 
   return (
     <div>
-      <h1>Todo List</h1>
+      <h1>Mi Lista</h1>
       <p>Pending tasks: {tasks.length}</p>
       <form
         onSubmit={(event) => {
