@@ -1,63 +1,37 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function App() {
   const [title, setTitle] = useState("");
-  const [tasks, setTasks] = useState(["Do dishes", "Buy milk"]);
+  const [tasks, setTasks] = useState([]);
 
-  useEffect(() => {
-    document.title = `${tasks.length} tasks remaining`;
-  }, [tasks]);
-
-  useEffect(() => {
-    if (tasks.length === 0) {
-      alert("You completed all tasks!");
-    }
-  }, [tasks]);
+  const pendingTasks = tasks.length;
 
   return (
     <div>
-      <h1>Mi Lista</h1>
-      <p>Pending tasks: {tasks.length}</p>
-      <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          setTasks([title, ...tasks]);
-          setTitle("");
-        }}
-      >
-        <input
-          value={title}
-          type="text"
+      <h1>Task Manager</h1>
+      <p>Pending tasks: {pendingTasks}</p>
+      <div>
+        <input 
+          type="text" 
+          value={title} 
           onChange={(event) => {
-            setTitle(event.target.value);
+            setTitle(event.target.value)
           }}
         />
-        <button type="submit">Add</button>
-      </form>
+        <button 
+          onClick={() => {
+            setTasks([title, ...tasks]);
+            setTitle("");
+          }}>Add
+        </button>
+      </div>
       <ul>
         {tasks.map((task) => {
-          return (
-            <li
-              onClick={() => {
-                setTasks(tasks.filter((t) => t !== task));
-              }}
-            >
-              {task}
-            </li>
-          );
+          return <li onClick={() =>{
+            setTasks(tasks.filter((t) => t !== task));
+          }}>{task}</li>;
         })}
       </ul>
-      {tasks.length > 0 ? (
-        <button
-          onClick={() => {
-            setTasks([]);
-          }}
-        >
-          Complete all tasks
-        </button>
-      ) : (
-        <div />
-      )}
     </div>
   );
 }
