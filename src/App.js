@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import "./App.css";
 
 function App() {
   const [title, setTitle] = useState("");
   const [tasks, setTasks] = useState([]);
 
   const pendingTasks = tasks.length;
+
+  useEffect(() => {
+    document.title = `${pendingTasks} tasks remaining`;
+  }, [pendingTasks]);
 
   return (
     <div>
@@ -25,7 +30,7 @@ function App() {
           }}>Add
         </button>
       </div>
-      <ul>
+      <ul className="task-list">
         {tasks.map((task) => {
           return <li onClick={() =>{
             setTasks(tasks.filter((t) => t !== task));
