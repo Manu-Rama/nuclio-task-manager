@@ -11,6 +11,12 @@ function App() {
     document.title = `${pendingTasks} tasks remaining`;
   }, [pendingTasks]);
 
+  useEffect(() => {
+    if(pendingTasks === 0) {
+      alert('')
+    };
+  }, [pendingTasks]);
+
   return (
     <div>
       <h1>Task Manager</h1>
